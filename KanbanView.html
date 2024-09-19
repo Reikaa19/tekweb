@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban View</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+	body {
+  	background-color: #f8f9fa;
+	}
+
+	.card {
+  	margin-bottom: 15px;
+	}
+
+	.card-header {
+  	font-weight: bold;
+	}
+
+	.kanban-board {
+  	margin: 20px 0;
+	}
+
+  </style></head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid" style="background-image: linear-gradient(to right,#1ddefc,#53a4f6);" >
+          <span class="navbar-brand mb-0 h1" style="font-size: 30px; color: white;" >Kanban view</span>
+        </div>
+      </nav>
+      <div class="card mb-4">
+        <div class="card-body">
+          <form id="taskForm">
+            <div class="mb-3">
+              <label for="taskInput" class="form-label">Tugas</label>
+              <input type="text" class="form-control" id="taskInput" placeholder="Masukkan tugas">
+            </div>
+            <div class="mb-3">
+              <label for="statusSelect" class="form-label">Status</label>
+              <select class="form-select" id="statusSelect">
+                <option value="Pending">Pending</option>
+                <option value="Planning">Planning</option>
+                <option value="Design">Design</option>
+                <option value="Development">Development</option>
+                <option value="Testing">Testing</option>
+                <option value="Resolved">Resolved</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Tambah</button>
+          </form>
+          <br><br>
+          <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-header text-center">Pending</div>
+                      <div class="card-body" id="Pending">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-header text-center">Planning</div>
+                      <div class="card-body" id="Planning">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-header text-center">Design</div>
+                      <div class="card-body" id="Design">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-header text-center">Development</div>
+                      <div class="card-body" id="Development">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-header text-center">Testing</div>
+                      <div class="card-body" id="Testing">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-header text-center">Resolved</div>
+                      <div class="card-body" id="Resolved">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br><br><br><br>
+        </div>
+      </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+  	$('#taskForm').submit(function(event) {
+    	event.preventDefault();
+
+    	const taskInput = $('#taskInput').val();
+    	const statusSelect = $('#statusSelect').val();
+
+    	const taskElement = $('<div class="card mb-2"><div class="card-body p-2">' + taskInput + '</div></div>');
+        // double klik utk hapus
+    	taskElement.dblclick(function() {
+      	$(this).remove();
+    	});
+
+    	$('#' + statusSelect).append(taskElement);
+        
+    	$('#taskForm')[0].reset();
+  	});
+	});
+</script>
+</html>
